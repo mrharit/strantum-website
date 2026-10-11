@@ -49,7 +49,7 @@ export function SolutionsTabs({ solutions }: { solutions: Solution[] }) {
   return (
     <div data-solutions className="mt-16 grid gap-10 lg:grid-cols-12 lg:gap-14">
       <noscript>
-        <style>{`@layer base{[data-solutions] [role="tabpanel"][hidden]{display:block!important}[data-solutions] [role="tablist"]{display:none!important}}[data-solutions] [role="tabpanel"]{border-top:1px solid var(--line);padding-top:2.5rem;margin-bottom:2.5rem}`}</style>
+        <style>{`@layer base{[data-solutions] [role="tabpanel"][hidden]{display:block!important}[data-solutions] [role="tablist"]{display:none!important}}[data-solutions] [role="tabpanel"]{border-top:1px solid var(--rule);padding-top:2.5rem;margin-bottom:2.5rem}`}</style>
       </noscript>
 
       <div
@@ -75,8 +75,8 @@ export function SolutionsTabs({ solutions }: { solutions: Solution[] }) {
               onKeyDown={(e) => onKeyDown(e, i)}
               className={`font-display shrink-0 whitespace-nowrap border-b-2 px-4 py-3 text-left text-[1rem] transition-colors duration-300 motion-reduce:transition-none lg:whitespace-normal lg:border-b lg:border-l-2 lg:border-b-line lg:py-5 lg:pl-6 lg:text-[1.1875rem] ${
                 selected
-                  ? "border-teal text-ivory lg:border-l-teal"
-                  : "border-transparent text-ivory-muted hover:text-ivory lg:border-l-transparent"
+                  ? "border-(--accent) text-fg lg:border-l-(--accent)"
+                  : "border-transparent text-fg-muted hover:text-fg lg:border-l-transparent"
               }`}
             >
               {s.role}
@@ -101,7 +101,7 @@ export function SolutionsTabs({ solutions }: { solutions: Solution[] }) {
             <div className="mt-10 grid gap-10 md:grid-cols-2 md:gap-12">
               <div>
                 <p className="eyebrow">The problem</p>
-                <p className="mt-4 text-[1.0625rem] leading-relaxed text-ivory-muted">
+                <p className="mt-4 text-[1.0625rem] leading-relaxed text-fg-muted">
                   {s.problem}
                 </p>
               </div>
@@ -113,11 +113,11 @@ export function SolutionsTabs({ solutions }: { solutions: Solution[] }) {
               </div>
             </div>
 
-            <div className="mt-10 border-t border-line pt-8">
+            <div className="mt-10 border-t border-rule pt-8">
               <p className="eyebrow">Deliverables</p>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {s.deliverables.map((d) => (
-                  <li key={d} className="chip text-ivory">
+                  <li key={d} className="chip text-fg">
                     {d}
                   </li>
                 ))}
@@ -125,13 +125,13 @@ export function SolutionsTabs({ solutions }: { solutions: Solution[] }) {
             </div>
 
             <div className="mt-8 flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
-              <p className="data flex flex-wrap items-center gap-x-3 gap-y-1 text-ivory-muted">
+              <p className="data flex flex-wrap items-center gap-x-3 gap-y-1 text-fg-muted">
                 <span>Most used</span>
                 {s.services.map((sv) => (
                   <Link
                     key={sv.href}
                     href={sv.href}
-                    className="text-ivory underline decoration-current/30 underline-offset-[5px] transition-[text-decoration-color] hover:decoration-current"
+                    className="text-fg underline decoration-current/30 underline-offset-[5px] transition-[text-decoration-color] hover:decoration-current"
                   >
                     {sv.title}
                   </Link>

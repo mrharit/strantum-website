@@ -28,7 +28,7 @@ export function DemoWork() {
     <section
       id="demonstration-work"
       aria-labelledby="demo-title"
-      className="grain surface-ink py-24 md:py-32"
+      className="grain surface-ivory py-24 md:py-32"
     >
       <div className="container-page">
         <SectionHeading
@@ -49,19 +49,19 @@ export function DemoWork() {
               as="li"
               key={d.title}
               delay={i * 100}
-              className="flex flex-col border border-line bg-ink-raised"
+              className="flex flex-col border border-rule bg-raised"
             >
-              <div className="relative aspect-[4/3] overflow-hidden border-b border-line">
+              <div className="relative aspect-[4/3] overflow-hidden border-b border-rule">
                 <div
                   aria-hidden="true"
-                  className="absolute inset-0 text-ivory opacity-40"
+                  className="absolute inset-0 text-fg opacity-50"
                 >
                   <Visual kind={d.visual} />
                 </div>
-                <p className="data absolute left-3 top-3 border border-teal/60 bg-ink px-2 py-1 text-[0.6875rem] text-teal">
+                <p className="data absolute left-3 top-3 border border-(--accent)/60 bg-canvas px-2 py-1 text-[0.6875rem] text-(--accent)">
                   {demoLabel}
                 </p>
-                <p className="data absolute bottom-3 left-3 text-ivory">
+                <p className="data absolute bottom-3 left-3 text-fg">
                   <Todo>real render</Todo>
                 </p>
               </div>
@@ -70,25 +70,25 @@ export function DemoWork() {
                 <h3 className="display display-md !text-[1.5rem]">{d.title}</h3>
 
                 <dl className="mt-6 grid grid-cols-[6.5rem_1fr] gap-x-4 gap-y-3 text-[0.875rem]">
-                  <dt className="eyebrow !text-ivory-muted">Size</dt>
-                  <dd className="data text-ivory">
+                  <dt className="eyebrow !text-fg-muted">Size</dt>
+                  <dd className="data text-fg">
                     <RichText text={d.size} />
                   </dd>
-                  <dt className="eyebrow !text-ivory-muted">LOD</dt>
-                  <dd className="data text-ivory">
+                  <dt className="eyebrow !text-fg-muted">LOD</dt>
+                  <dd className="data text-fg">
                     <RichText text={d.lod} />
                   </dd>
-                  <dt className="eyebrow !text-ivory-muted">Discipline</dt>
-                  <dd className="data text-ivory">{d.discipline}</dd>
-                  <dt className="eyebrow !text-ivory-muted">Software</dt>
-                  <dd className="data text-ivory">
+                  <dt className="eyebrow !text-fg-muted">Discipline</dt>
+                  <dd className="data text-fg">{d.discipline}</dd>
+                  <dt className="eyebrow !text-fg-muted">Software</dt>
+                  <dd className="data text-fg">
                     <RichText text={d.software} />
                   </dd>
                 </dl>
 
-                <div className="mt-6 flex-1 border-t border-line pt-5">
+                <div className="mt-6 flex-1 border-t border-rule pt-5">
                   <p className="eyebrow">What it demonstrates</p>
-                  <p className="mt-3 text-[0.9375rem] leading-relaxed text-ivory-muted">
+                  <p className="mt-3 text-[0.9375rem] leading-relaxed text-fg-muted">
                     {d.demonstrates}
                   </p>
                 </div>

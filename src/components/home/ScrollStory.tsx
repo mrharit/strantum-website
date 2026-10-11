@@ -61,15 +61,15 @@ export function ScrollStory({
             }}
             data-index={i}
             data-active={i === active}
-            className="border-t border-line py-10 transition-opacity duration-500 first:border-t-0 group-data-[enhanced=true]/story:data-[active=false]:lg:opacity-35 lg:flex lg:min-h-[72svh] lg:flex-col lg:justify-center lg:border-t-0 lg:py-12 motion-reduce:transition-none"
+            className="border-t border-rule py-10 transition-opacity duration-500 first:border-t-0 group-data-[enhanced=true]/story:data-[active=false]:lg:opacity-35 lg:flex lg:min-h-[72svh] lg:flex-col lg:justify-center lg:border-t-0 lg:py-12 motion-reduce:transition-none"
           >
             <p className="data flex items-center gap-3 text-(--accent)">
               <span>{String(c.n).padStart(2, "0")} / 06</span>
               <span aria-hidden="true" className="h-px w-8 bg-current opacity-50" />
             </p>
             <h3 className="display display-md mt-4">{c.name}</h3>
-            <p className="eyebrow mt-3 !text-ivory-muted">{c.service}</p>
-            <p className="mt-5 max-w-md text-[1.0625rem] leading-relaxed text-ivory-muted">
+            <p className="eyebrow mt-3 !text-fg-muted">{c.service}</p>
+            <p className="mt-5 max-w-md text-[1.0625rem] leading-relaxed text-fg-muted">
               {c.text}
             </p>
             <TextLink href={c.href} className="mt-6 self-start">
@@ -79,7 +79,7 @@ export function ScrollStory({
             {/* Inline diagram for phones and tablets */}
             <div
               aria-hidden="true"
-              className="mt-8 border border-line bg-ink-raised/60 p-3 lg:hidden"
+              className="mt-8 border border-rule bg-raised/60 p-3 lg:hidden"
             >
               {diagrams[i]}
             </div>
@@ -91,11 +91,11 @@ export function ScrollStory({
       <div className="relative hidden lg:col-span-7 lg:block">
         <div
           aria-hidden="true"
-          className="sticky top-[calc(var(--header-h)+1.5rem)] h-[calc(100svh-var(--header-h)-3rem)] min-h-[34rem] border border-line bg-ink-raised/50"
+          className="sticky top-[calc(var(--header-h)+1.5rem)] h-[calc(100svh-var(--header-h)-3rem)] min-h-[34rem] border border-rule bg-raised/50"
         >
-          <div className="data absolute inset-x-0 top-0 z-10 flex items-center justify-between border-b border-line bg-ink-raised/80 px-5 py-3 text-ivory-muted">
+          <div className="data absolute inset-x-0 top-0 z-10 flex items-center justify-between border-b border-rule bg-raised/80 px-5 py-3 text-fg-muted">
             <span>Chapter {String(current.n).padStart(2, "0")} / 06</span>
-            <span className="eyebrow !text-ivory-muted">{current.name}</span>
+            <span className="eyebrow !text-fg-muted">{current.name}</span>
           </div>
           {diagrams.map((d, i) => (
             <div
@@ -115,7 +115,7 @@ export function ScrollStory({
               <span
                 key={c.n}
                 className={`h-0.5 flex-1 transition-colors duration-500 motion-reduce:transition-none ${
-                  i <= active ? "bg-teal" : "bg-line"
+                  i <= active ? "bg-(--accent)" : "bg-rule"
                 }`}
               />
             ))}

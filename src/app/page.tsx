@@ -29,7 +29,7 @@ export default function Home() {
       <section
         id="story"
         aria-labelledby="story-title"
-        className="surface-ink relative py-24 md:py-32"
+        className="surface-paper relative py-24 md:py-32"
       >
         <div className="container-page">
           <SectionHeading
@@ -57,7 +57,7 @@ export default function Home() {
       <section
         id="solutions"
         aria-labelledby="solutions-title"
-        className="surface-ink py-24 md:py-32"
+        className="surface-ivory py-24 md:py-32"
       >
         <div className="container-page">
           <SectionHeading

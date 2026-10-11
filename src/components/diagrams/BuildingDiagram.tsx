@@ -38,8 +38,8 @@ const poly = (pts: V3[]) => pts.map(pt).join(" ");
 const line = (a: V3, b: V3) => `M${pt(a)}L${pt(b)}`;
 
 /* ------------------------------ palette ------------------------------- */
-const IVORY = "var(--ivory)";
-const TEAL = "var(--teal)";
+const IVORY = "var(--draw)"; // line colour: ink on light surfaces, ivory on dark
+const TEAL = "var(--accent)"; // teal-ink on light surfaces, teal on dark
 const SIGNAL = "var(--signal)";
 
 /* ------------------------------ helpers ------------------------------- */
@@ -158,7 +158,7 @@ function GridLayer() {
     <g>
       <g
         stroke={IVORY}
-        strokeOpacity={0.22}
+        strokeOpacity={0.3}
         strokeWidth={0.8}
         strokeDasharray="10 3 2 3"
       >
@@ -188,14 +188,14 @@ function ShellLayer({ faded = false }: { faded?: boolean }) {
   return (
     <g fill="none" strokeLinecap="round" strokeLinejoin="round">
       {/* hidden back edges: ground and roof, very faint */}
-      <g stroke={IVORY} strokeOpacity={0.14 * k} strokeWidth={0.8}>
+      <g stroke={IVORY} strokeOpacity={0.2 * k} strokeWidth={0.8}>
         <path d={line([0, 0, 0], [W, 0, 0])} />
         <path d={line([0, 0, 0], [0, D, 0])} />
         <path d={line([0, 0, 0], [0, 0, H])} />
       </g>
 
       {/* façade mullions on the two visible faces */}
-      <g stroke={IVORY} strokeOpacity={0.2 * k} strokeWidth={0.75}>
+      <g stroke={IVORY} strokeOpacity={0.26 * k} strokeWidth={0.75}>
         {Array.from({ length: 11 }, (_, i) => 0.5 * (i + 1)).map((x) => (
           <path key={`mx${x}`} d={line([x, D, 0], [x, D, H])} />
         ))}
@@ -205,7 +205,7 @@ function ShellLayer({ faded = false }: { faded?: boolean }) {
       </g>
 
       {/* floor lines on the two visible faces */}
-      <g stroke={IVORY} strokeOpacity={0.5 * k} strokeWidth={1}>
+      <g stroke={IVORY} strokeOpacity={0.62 * k} strokeWidth={1}>
         {levels.map((i) => (
           <path
             key={`f${i}`}
@@ -219,7 +219,7 @@ function ShellLayer({ faded = false }: { faded?: boolean }) {
       </g>
 
       {/* visible corner verticals */}
-      <g stroke={IVORY} strokeOpacity={0.65 * k} strokeWidth={1.2}>
+      <g stroke={IVORY} strokeOpacity={0.78 * k} strokeWidth={1.2}>
         <path d={line([0, D, 0], [0, D, H])} />
         <path d={line([W, D, 0], [W, D, H])} />
         <path d={line([W, 0, 0], [W, 0, H])} />
@@ -233,7 +233,7 @@ function ShellLayer({ faded = false }: { faded?: boolean }) {
         x1={4}
         y1={2.1}
         z1={H + 0.36}
-        strokeOpacity={0.5 * k}
+        strokeOpacity={0.6 * k}
         fillOpacity={0.04}
       />
     </g>
@@ -327,10 +327,9 @@ function MepLayer({
   hot?: boolean; // paint the clashing duct run red (stage 4)
 }) {
   const floors = Array.from({ length: 6 }, (_, i) => i + 1);
-  const glow = { filter: "drop-shadow(0 0 3px rgba(0,174,187,0.55))" };
   return (
     <g fill="none" strokeLinecap="round" strokeLinejoin="round">
-      <g style={glow}>
+      <g>
         {floors.map((k) => {
           const zk = k * H1;
           const { z0, z1 } = duct(zk);
@@ -515,7 +514,7 @@ function Marker({ resolved }: { resolved: boolean }) {
       {resolved && (
         <path
           d={`M${cx - 3.6},${cy + 0.2}L${cx - 1},${cy + 3}L${cx + 4},${cy - 3}`}
-          stroke="var(--ink)"
+          stroke="var(--surface)"
           strokeWidth={1.8}
           fill="none"
           strokeLinecap="round"
@@ -533,7 +532,7 @@ function Marker({ resolved }: { resolved: boolean }) {
         y={ly}
         width={w}
         height={34}
-        fill="var(--ink)"
+        fill="var(--surface)"
         stroke={colour}
         strokeWidth={1.2}
       />
@@ -568,16 +567,16 @@ function Counter({
         y={y}
         width={236}
         height={40}
-        fill="var(--ink)"
+        fill="var(--surface)"
         stroke={colour}
-        strokeOpacity={0.7}
-        strokeWidth={1}
+        strokeOpacity={0.9}
+        strokeWidth={1.4}
       />
       <text
         x={x + 16}
         y={y + 20}
         dy="0.35em"
-        fill={colour}
+        fill={open === 0 ? TEAL : IVORY}
         fontSize={18}
         style={{ fontFamily: "var(--font-mono)" }}
       >

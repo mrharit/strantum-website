@@ -19,7 +19,7 @@ const SIZES = {
 const VARIANTS = {
   primary: "bg-teal text-ink hover:brightness-110",
   outline:
-    "border border-current/40 hover:border-teal hover:text-teal",
+    "border border-current/40 hover:border-(--accent) hover:text-(--accent)",
   // For use on a teal surface: ink background, ivory text (15:1).
   ink: "bg-ink text-ivory hover:brightness-150",
 };
@@ -58,7 +58,7 @@ export function ArrowLink({
       href={href}
       className={`font-display group inline-flex items-center gap-3 tracking-[0.02em] ${className}`}
     >
-      <span className="grid size-12 shrink-0 place-items-center rounded-full border border-current/40 transition-[background-color,color,border-color] duration-300 group-hover:border-teal group-hover:bg-teal group-hover:text-ink motion-reduce:transition-none">
+      <span className="grid size-12 shrink-0 place-items-center rounded-full border border-current/40 transition-[background-color,color,border-color] duration-300 group-hover:border-(--accent) group-hover:bg-teal group-hover:text-ink motion-reduce:transition-none">
         <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" />
       </span>
       <span>{children}</span>

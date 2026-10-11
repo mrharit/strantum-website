@@ -50,12 +50,12 @@ export function FAQ() {
         </div>
 
         <div className="lg:col-span-8">
-          <div className="border-t border-line-ink">
+          <div className="border-t border-rule">
             {faqs.map((f) => (
               <details
                 key={f.q}
                 name="faq"
-                className="faq-item border-b border-line-ink"
+                className="faq-item border-b border-rule"
               >
                 <summary className="flex items-center justify-between gap-6 py-6 md:py-7">
                   <h3 className="font-display text-[1.1875rem] leading-snug md:text-[1.3125rem]">
@@ -66,7 +66,7 @@ export function FAQ() {
                     className="faq-plus relative size-6 shrink-0 before:absolute before:left-1/2 before:top-1/2 before:h-px before:w-4 before:-translate-x-1/2 before:-translate-y-1/2 before:bg-current after:absolute after:left-1/2 after:top-1/2 after:h-4 after:w-px after:-translate-x-1/2 after:-translate-y-1/2 after:bg-current"
                   />
                 </summary>
-                <div className="max-w-2xl pb-8 text-[1rem] leading-relaxed text-ink-muted">
+                <div className="max-w-2xl pb-8 text-[1rem] leading-relaxed text-fg-muted">
                   <p>
                     <RichText text={f.a} />
                   </p>

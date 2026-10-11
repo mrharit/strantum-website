@@ -15,7 +15,7 @@ export function ServicesGrid() {
     <section
       id="services"
       aria-labelledby="services-title"
-      className="surface-ivory py-24 md:py-32"
+      className="surface-paper py-24 md:py-32"
     >
       <div className="container-page">
         <SectionHeading
@@ -30,7 +30,7 @@ export function ServicesGrid() {
           lead={servicesIntro.lead}
         />
 
-        <ul className="mt-16 grid border-l border-t border-line-ink sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-16 grid border-l border-t border-rule sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s, i) => {
             const slug = s.href.split("/").pop() as ServiceSlug;
             return (
@@ -38,19 +38,19 @@ export function ServicesGrid() {
                 as="li"
                 key={s.href}
                 delay={(i % 3) * 90}
-                className="border-b border-r border-line-ink"
+                className="border-b border-r border-rule"
               >
                 <Link
                   href={s.href}
                   className="group flex h-full flex-col p-6 transition-colors duration-300 hover:bg-ink/[0.045] motion-reduce:transition-none md:p-8"
                 >
-                  <div className="aspect-[8/5] w-full text-ink">
+                  <div className="aspect-[8/5] w-full text-fg">
                     <ServiceGlyph slug={slug} />
                   </div>
                   <h3 className="font-display mt-8 text-[1.3125rem] leading-snug">
                     {s.title}
                   </h3>
-                  <p className="mt-3 flex-1 text-[0.9375rem] leading-relaxed text-ink-muted">
+                  <p className="mt-3 flex-1 text-[0.9375rem] leading-relaxed text-fg-muted">
                     {serviceOutcomes[slug]}
                   </p>
                   <span className="data mt-6 inline-flex items-center gap-2 text-(--accent)">

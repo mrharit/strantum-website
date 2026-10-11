@@ -56,6 +56,7 @@ const T = Object.fromEntries(
     "teal-ink",
     "signal",
     "ink-muted",
+    "paper",
   ].map((n) => [n, token(n)]),
 );
 
@@ -74,6 +75,13 @@ const PAIRS = [
   ["teal-ink on ivory (links, eyebrows)", "teal-ink", "ivory", 4.5],
   ["teal on ivory — DO NOT USE for text", "teal", "ivory", 4.5, true],
   ["ivory on teal — DO NOT USE for text", "ivory", "teal", 4.5, true],
+  // Light theme (default surfaces): ivory and paper
+  ["ink on paper (body)", "ink", "paper", 4.5],
+  ["ink-muted on paper", "ink-muted", "paper", 4.5],
+  ["teal-ink on paper (accent text)", "teal-ink", "paper", 4.5],
+  ["teal-ink as focus ring on paper", "teal-ink", "paper", 3],
+  ["signal on ivory — marker shape only, never text", "signal", "ivory", 3, true],
+  ["signal on paper — marker shape only, never text", "signal", "paper", 3, true],
   ["signal on ink (clash marker, graphic)", "signal", "ink", 3],
   ["teal-ink on ivory as focus ring", "teal-ink", "ivory", 3],
   ["teal on ink as focus ring", "teal", "ink", 3],

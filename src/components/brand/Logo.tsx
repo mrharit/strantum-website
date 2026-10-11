@@ -4,8 +4,9 @@ export type LogoVariant = "on-ink" | "on-ivory";
 type LogoSize = "sm" | "md" | "lg";
 
 // File convention (see public/brand/README.md):
-//   logo-reversed.svg → for ink backgrounds  (variant "on-ink", the default)
-//   logo.svg          → for ivory backgrounds (variant "on-ivory")
+//   logo-reversed.svg → for ink backgrounds  (variant "on-ink")
+//   logo.svg          → for ivory backgrounds (variant "on-ivory", the default:
+//                       the site is light)
 // The flags are set in next.config.ts, which checks public/brand at build time.
 const FILES: Record<LogoVariant, { src: string; present: boolean }> = {
   "on-ink": {
@@ -51,7 +52,7 @@ function BarredA() {
 }
 
 export function Logo({
-  variant = "on-ink",
+  variant = "on-ivory",
   size = "md",
   showTagline = true,
   className = "",

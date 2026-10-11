@@ -6,7 +6,7 @@ import { companyLinks, legalLinks, services, solutions } from "@/content/nav";
 import { site } from "@/lib/site";
 
 const linkClass =
-  "inline-block py-1 text-[0.9375rem] text-ivory-muted transition-colors duration-300 hover:text-ivory motion-reduce:transition-none";
+  "inline-block py-1 text-[0.9375rem] text-fg-muted transition-colors duration-300 hover:text-fg motion-reduce:transition-none";
 
 function Column({
   title,
@@ -35,31 +35,31 @@ export function Footer() {
   const { contact } = site;
 
   return (
-    <footer className="grain surface-raised border-t border-line">
+    <footer className="grain surface-paper border-t border-rule">
       <div className="container-page py-16 md:py-20">
         <div className="grid gap-14 lg:grid-cols-[1.5fr_1.25fr_1fr_1fr] lg:gap-10">
           <div>
             <Link href="/" className="inline-block">
-              <Logo variant="on-ink" size="md" />
+              <Logo variant="on-ivory" size="md" />
             </Link>
-            <p className="mt-6 max-w-xs text-[0.9375rem] leading-relaxed text-ivory-muted">
+            <p className="mt-6 max-w-xs text-[0.9375rem] leading-relaxed text-fg-muted">
               {site.mission}
             </p>
 
             <dl className="mt-8 grid gap-5 text-[0.9375rem]">
               <div>
                 <dt className="eyebrow">Office</dt>
-                <dd className="mt-1.5 text-ivory-muted">
+                <dd className="mt-1.5 text-fg-muted">
                   {contact.address ?? <Todo>office address</Todo>}
                 </dd>
               </div>
               <div>
                 <dt className="eyebrow">Email</dt>
-                <dd className="mt-1.5 text-ivory-muted">
+                <dd className="mt-1.5 text-fg-muted">
                   {contact.email ? (
                     <a
                       href={`mailto:${contact.email}`}
-                      className="transition-colors hover:text-ivory"
+                      className="transition-colors hover:text-fg"
                     >
                       {contact.email}
                     </a>
@@ -70,11 +70,11 @@ export function Footer() {
               </div>
               <div>
                 <dt className="eyebrow">Phone</dt>
-                <dd className="mt-1.5 text-ivory-muted">
+                <dd className="mt-1.5 text-fg-muted">
                   {contact.phone ? (
                     <a
                       href={`tel:${contact.phone.replace(/\s/g, "")}`}
-                      className="transition-colors hover:text-ivory"
+                      className="transition-colors hover:text-fg"
                     >
                       {contact.phone}
                     </a>
@@ -85,13 +85,13 @@ export function Footer() {
               </div>
               <div>
                 <dt className="eyebrow">LinkedIn</dt>
-                <dd className="mt-1.5 text-ivory-muted">
+                <dd className="mt-1.5 text-fg-muted">
                   {contact.linkedin ? (
                     <a
                       href={contact.linkedin}
                       rel="noopener noreferrer"
                       target="_blank"
-                      className="transition-colors hover:text-ivory"
+                      className="transition-colors hover:text-fg"
                     >
                       STRANTUM on LinkedIn
                     </a>
@@ -108,7 +108,7 @@ export function Footer() {
           <Column title="Company" links={companyLinks} />
         </div>
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-line pt-6 text-[0.8125rem] text-ivory-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-16 flex flex-col gap-4 border-t border-rule pt-6 text-[0.8125rem] text-fg-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             © <CurrentYear /> {site.name} — {site.tagline}. All rights
             reserved.
@@ -118,7 +118,7 @@ export function Footer() {
               <li key={l.href}>
                 <Link
                   href={l.href}
-                  className="py-1 transition-colors duration-300 hover:text-ivory motion-reduce:transition-none"
+                  className="py-1 transition-colors duration-300 hover:text-fg motion-reduce:transition-none"
                 >
                   {l.title}
                 </Link>

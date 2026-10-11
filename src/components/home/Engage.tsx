@@ -11,7 +11,7 @@ export function Engage() {
     <section
       id="engage"
       aria-labelledby="engage-title"
-      className="surface-ivory py-24 md:py-32"
+      className="surface-paper py-24 md:py-32"
     >
       <div className="container-page">
         <SectionHeading
@@ -34,12 +34,12 @@ export function Engage() {
               delay={i * 100}
               className={
                 e.featured
-                  ? "surface-ink grain relative flex flex-col p-7 md:p-9"
-                  : "flex flex-col border border-line-ink p-7 md:p-9"
+                  ? "relative flex flex-col border border-(--accent) border-t-[5px] bg-raised p-7 md:p-9"
+                  : "flex flex-col border border-rule p-7 md:p-9"
               }
             >
               <p
-                className={`data ${e.featured ? "text-teal" : "text-(--accent)"}`}
+                className="data text-(--accent)"
               >
                 {e.tag}
               </p>
@@ -47,25 +47,19 @@ export function Engage() {
                 {e.title}
               </h3>
               <p
-                className={`mt-4 text-[1rem] leading-relaxed ${
-                  e.featured ? "text-ivory-muted" : "text-ink-muted"
-                }`}
+                className="mt-4 text-[1rem] leading-relaxed text-fg-muted"
               >
                 {e.text}
               </p>
 
               <ul
-                className={`mt-8 flex-1 space-y-3 border-t pt-6 text-[0.9375rem] ${
-                  e.featured ? "border-line" : "border-line-ink"
-                }`}
+                className="mt-8 flex-1 space-y-3 border-t border-rule pt-6 text-[0.9375rem]"
               >
                 {e.points.map((p) => (
                   <li key={p} className="flex gap-3">
                     <span
                       aria-hidden="true"
-                      className={`mt-[0.55em] size-1.5 shrink-0 ${
-                        e.featured ? "bg-teal" : "bg-teal-ink"
-                      }`}
+                      className="mt-[0.55em] size-1.5 shrink-0 bg-(--accent)"
                     />
                     <span>
                       <RichText text={p} />

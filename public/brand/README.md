@@ -5,8 +5,8 @@ uses them automatically and falls back to the text wordmark until they exist.
 
 | File                | Used for                                  | Variant      |
 | ------------------- | ----------------------------------------- | ------------ |
-| `logo.svg`          | Primary logo, for ivory backgrounds       | `on-ivory`   |
-| `logo-reversed.svg` | Reversed logo, for ink backgrounds        | `on-ink`     |
+| `logo.svg`          | Primary logo, for ivory backgrounds (**the site is light, so this is the one used almost everywhere**) | `on-ivory`   |
+| `logo-reversed.svg` | Reversed logo, for ink backgrounds (rarely needed now) | `on-ink`     |
 | `logo-icon.svg`     | Icon / favicon source (not wired up yet)  | —            |
 
 The presence check runs when the config loads (next.config.ts), so **restart

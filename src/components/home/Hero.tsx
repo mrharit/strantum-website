@@ -7,9 +7,9 @@ export function Hero() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="grain surface-ink relative isolate overflow-hidden"
+      className="grain surface-ivory relative isolate overflow-hidden"
     >
-      <ColumnRules bubbles className="text-ivory" />
+      <ColumnRules bubbles className="text-fg" />
 
       <div className="container-page relative grid min-h-[100svh] items-center gap-4 pb-32 pt-[calc(var(--header-h)+4.5rem)] lg:grid-cols-12 lg:gap-6 lg:pb-28 lg:pt-[calc(var(--header-h)+2.5rem)]">
         <div className="lg:col-span-6">
@@ -22,7 +22,7 @@ export function Hero() {
               <span className="accent">built</span>.
             </span>
           </h1>
-          <p className="mt-8 max-w-[33rem] text-[1.125rem] leading-relaxed text-ivory-muted">
+          <p className="mt-8 max-w-[33rem] text-[1.125rem] leading-relaxed text-fg-muted">
             {hero.sub}
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
@@ -43,7 +43,7 @@ export function Hero() {
       <div className="container-page absolute inset-x-0 bottom-7 z-10 flex items-end justify-between gap-6">
         <a
           href="#story"
-          className="eyebrow group inline-flex items-center gap-3 !text-ivory-muted transition-colors duration-300 hover:!text-ivory motion-reduce:transition-none"
+          className="eyebrow group inline-flex items-center gap-3 !text-fg-muted transition-colors duration-300 hover:!text-fg motion-reduce:transition-none"
         >
           <span
             aria-hidden="true"
@@ -51,8 +51,8 @@ export function Hero() {
           />
           Scroll to explore
         </a>
-        <p className="data flex items-baseline gap-3 text-ivory-muted">
-          <span className="eyebrow !text-ivory-muted max-sm:hidden">
+        <p className="data flex items-baseline gap-3 text-fg-muted">
+          <span className="eyebrow !text-fg-muted max-sm:hidden">
             Architecture
           </span>
           <span aria-label="Chapter 1 of 6">01 / 06</span>

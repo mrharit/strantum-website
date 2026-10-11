@@ -60,8 +60,8 @@ const getScrolled = () => window.scrollY > SCROLL_THRESHOLD;
 const getScrolledServer = () => false;
 
 const navLink =
-  "font-display relative px-3 py-2 text-[0.9375rem] tracking-[0.02em] text-ivory transition-colors duration-300 hover:text-teal motion-reduce:transition-none " +
-  "after:absolute after:inset-x-3 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-teal after:transition-transform after:duration-300 hover:after:scale-x-100 aria-[current=page]:after:scale-x-100 motion-reduce:after:transition-none";
+  "font-display relative px-3 py-2 text-[0.9375rem] tracking-[0.02em] text-fg transition-colors duration-300 hover:text-(--accent) motion-reduce:transition-none " +
+  "after:absolute after:inset-x-3 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-(--accent) after:transition-transform after:duration-300 hover:after:scale-x-100 aria-[current=page]:after:scale-x-100 motion-reduce:after:transition-none";
 
 export function Header() {
   const pathname = usePathname();
@@ -176,9 +176,9 @@ export function Header() {
         aria-hidden="true"
         className={`absolute inset-0 -z-10 border-b transition-[background-color,border-color,backdrop-filter] duration-300 motion-reduce:transition-none ${
           mobileOpen
-            ? "border-line bg-ink"
+            ? "border-rule bg-canvas"
             : solid
-              ? "border-line bg-ink-raised/90 backdrop-blur-lg"
+              ? "border-rule bg-raised/90 backdrop-blur-lg"
               : "border-transparent bg-transparent"
         }`}
       />
@@ -186,7 +186,7 @@ export function Header() {
       {/* No positioned ancestor here: the mega panels size against the header. */}
       <div className="container-page flex h-[var(--header-h)] items-center justify-between gap-4">
         <Link href="/" onClick={closeAll} className="relative z-50 shrink-0">
-          <Logo variant="on-ink" size="md" />
+          <Logo variant="on-ivory" size="md" />
         </Link>
 
         <nav aria-label="Primary" className="hidden self-stretch lg:block">
@@ -232,7 +232,7 @@ export function Header() {
                       aria-controls={panelId}
                       aria-label={`${m.label} menu`}
                       onClick={() => (open ? setMenuState(null) : openMenu(id))}
-                      className="grid size-8 place-items-center text-ivory transition-colors duration-300 hover:text-teal motion-reduce:transition-none"
+                      className="grid size-8 place-items-center text-fg transition-colors duration-300 hover:text-(--accent) motion-reduce:transition-none"
                     >
                       <Chevron
                         className={`size-3.5 transition-transform duration-300 motion-reduce:transition-none ${open ? "rotate-180" : ""}`}
@@ -280,7 +280,7 @@ export function Header() {
             aria-expanded={mobileOpen}
             aria-controls={`${baseId}-mobile`}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            className="grid size-10 place-items-center text-ivory transition-colors duration-300 hover:text-teal motion-reduce:transition-none lg:hidden"
+            className="grid size-10 place-items-center text-fg transition-colors duration-300 hover:text-(--accent) motion-reduce:transition-none lg:hidden"
           >
             {mobileOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
@@ -294,7 +294,7 @@ export function Header() {
         // Visibility must flip instantly on open (so focus() works on the first
         // frame) and only after the fade on close. A plain `transition` on
         // visibility starts at `hidden`, which silently rejects focus().
-        className={`grain surface-ink fixed inset-0 z-40 overflow-y-auto overscroll-contain pt-[var(--header-h)] lg:hidden ${
+        className={`grain surface-ivory fixed inset-0 z-40 overflow-y-auto overscroll-contain pt-[var(--header-h)] lg:hidden ${
           mobileOpen
             ? "visible opacity-100 [transition:opacity_300ms,visibility_0s]"
             : "invisible opacity-0 [transition:opacity_300ms,visibility_0s_linear_300ms]"
@@ -310,7 +310,7 @@ export function Header() {
               const open = mobileSection === id;
               const sectionId = `${baseId}-m-${id}`;
               return (
-                <li key={id} className="border-b border-line">
+                <li key={id} className="border-b border-rule">
                   <button
                     type="button"
                     ref={i === 0 ? mobileFirstRef : undefined}
@@ -328,7 +328,7 @@ export function Header() {
                     <Link
                       href={m.href}
                       onClick={closeAll}
-                      className="data mb-3 flex items-center gap-2 py-2 text-teal"
+                      className="data mb-3 flex items-center gap-2 py-2 text-(--accent)"
                     >
                       {m.cta} <ArrowRight className="size-4" />
                     </Link>
@@ -343,7 +343,7 @@ export function Header() {
                             <span className="font-display block text-[1.0625rem]">
                               {item.title}
                             </span>
-                            <span className="block text-[0.9375rem] leading-snug text-ivory-muted">
+                            <span className="block text-[0.9375rem] leading-snug text-fg-muted">
                               {item.blurb}
                             </span>
                           </Link>
@@ -355,7 +355,7 @@ export function Header() {
               );
             })}
             {primaryLinks.map((l) => (
-              <li key={l.href} className="border-b border-line">
+              <li key={l.href} className="border-b border-rule">
                 <Link
                   href={l.href}
                   onClick={closeAll}
@@ -395,7 +395,7 @@ function MegaPanel({
   return (
     <div
       id={id}
-      className={`absolute inset-x-0 top-full border-b border-line bg-ink-raised shadow-[0_28px_48px_-28px_rgba(0,0,0,0.7)] transition-[opacity,transform,visibility] duration-300 motion-reduce:translate-y-0 motion-reduce:transition-opacity ${
+      className={`absolute inset-x-0 top-full border-b border-rule bg-raised shadow-[0_28px_48px_-30px_rgba(3,18,17,0.35)] transition-[opacity,transform,visibility] duration-300 motion-reduce:translate-y-0 motion-reduce:transition-opacity ${
         open
           ? "visible translate-y-0 opacity-100"
           : "invisible -translate-y-2 opacity-0"
@@ -405,7 +405,7 @@ function MegaPanel({
         <div className="col-span-3 flex flex-col items-start justify-between gap-8">
           <div>
             <p className="eyebrow">{menu.label}</p>
-            <p className="mt-4 text-[0.9375rem] leading-relaxed text-ivory-muted">
+            <p className="mt-4 text-[0.9375rem] leading-relaxed text-fg-muted">
               {menu.intro}
             </p>
           </div>
@@ -414,7 +414,7 @@ function MegaPanel({
             onClick={onNavigate}
             className="font-display group inline-flex items-center gap-3 text-[0.9375rem]"
           >
-            <span className="grid size-10 place-items-center rounded-full border border-current/40 transition-[background-color,color,border-color] duration-300 group-hover:border-teal group-hover:bg-teal group-hover:text-ink motion-reduce:transition-none">
+            <span className="grid size-10 place-items-center rounded-full border border-current/40 transition-[background-color,color,border-color] duration-300 group-hover:border-(--accent) group-hover:bg-teal group-hover:text-ink motion-reduce:transition-none">
               <ArrowRight className="size-4" />
             </span>
             {menu.cta}
@@ -427,15 +427,15 @@ function MegaPanel({
               <Link
                 href={item.href}
                 onClick={onNavigate}
-                className="group block border-t border-line pt-4"
+                className="group block border-t border-rule pt-4"
               >
-                <span className="data text-teal">
+                <span className="data text-(--accent)">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="font-display mt-1 block text-[1.0625rem] leading-snug transition-colors duration-300 group-hover:text-teal motion-reduce:transition-none">
+                <span className="font-display mt-1 block text-[1.0625rem] leading-snug transition-colors duration-300 group-hover:text-(--accent) motion-reduce:transition-none">
                   {item.title}
                 </span>
-                <span className="mt-1 block text-[0.875rem] leading-snug text-ivory-muted">
+                <span className="mt-1 block text-[0.875rem] leading-snug text-fg-muted">
                   {item.blurb}
                 </span>
               </Link>

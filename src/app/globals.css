@@ -17,11 +17,23 @@
   /* Derived for ivory surfaces (not in the brief; checked by `npm run contrast`) */
   --ink-muted: rgba(3, 18, 17, 0.72);
   --line-ink: rgba(3, 18, 17, 0.16);
+  --paper: #f3f0e6; /* lighter than ivory: raised panels, alternate sections */
 
   --header-h: 4.5rem;
-  --focus: var(--teal);
-  --accent: var(--teal); /* flips to teal-ink on .surface-ivory */
-  --surface: var(--ink); /* current section background, for opaque SVG fills */
+
+  /* Semantic layer. The site is LIGHT by default (owner decision, Phase 2):
+     components use these, never ink/ivory directly, so a surface decides what
+     "foreground", "rule" or "accent" mean. .surface-ink flips them for the odd
+     dark element. */
+  --canvas: var(--ivory); /* page / section background */
+  --fg: var(--ink); /* primary text */
+  --fg-muted: var(--ink-muted); /* secondary text */
+  --rule: var(--line-ink); /* hairlines, borders */
+  --raised: var(--paper); /* cards and panels */
+  --accent: var(--teal-ink); /* accent TEXT and thin accent lines */
+  --focus: var(--teal-ink);
+  --surface: var(--ivory); /* opaque background for SVG fills */
+  --draw: var(--ink); /* line-drawing colour (building, glyphs) */
 }
 
 /* Tailwind theme: exposes the tokens as bg-ink, text-ivory, border-line … */
@@ -36,6 +48,14 @@
   --color-signal: var(--signal);
   --color-ink-muted: var(--ink-muted);
   --color-line-ink: var(--line-ink);
+  --color-paper: var(--paper);
+
+  /* semantic: bg-canvas, text-fg, text-fg-muted, border-rule, bg-raised */
+  --color-canvas: var(--canvas);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-rule: var(--rule);
+  --color-raised: var(--raised);
 }
 
 /* Fonts. The --font-* family variables are set by next/font on <html>.
@@ -55,15 +75,15 @@
 /* ------------------------------------------------------------------ */
 @layer base {
   html {
-    background: var(--ink);
-    color: var(--ivory);
+    background: var(--canvas);
+    color: var(--fg);
     scroll-padding-top: calc(var(--header-h) + 1rem);
     -webkit-text-size-adjust: 100%;
   }
 
   body {
-    background: var(--ink);
-    color: var(--ivory);
+    background: var(--canvas);
+    color: var(--fg);
     font-family: var(--font-sans);
     font-size: 1.0625rem;
     line-height: 1.65;
@@ -100,37 +120,45 @@
 
 @layer components {
   /* ------------------------------------------------------------------ */
-  /* Surfaces                                                             */
+  /* Surfaces. Light is the default (:root); a surface only restates what    */
+  /* differs. Light sections alternate ivory (base) and paper (lighter).     */
   /* ------------------------------------------------------------------ */
-  .surface-ink {
-    background: var(--ink);
-    color: var(--ivory);
-    --focus: var(--teal);
-    --accent: var(--teal);
-    --surface: var(--ink);
-  }
-
-  .surface-raised {
-    background: var(--ink-raised);
-    color: var(--ivory);
-    --focus: var(--teal);
-    --accent: var(--teal);
-    --surface: var(--ink-raised);
-  }
-
-  /* Light sections. Teal text must be --teal-ink here; focus ring flips too. */
   .surface-ivory {
     background: var(--ivory);
     color: var(--ink);
-    --focus: var(--teal-ink);
-    --accent: var(--teal-ink);
+    --canvas: var(--ivory);
+    --raised: var(--paper);
     --surface: var(--ivory);
+  }
+
+  .surface-paper {
+    background: var(--paper);
+    color: var(--ink);
+    --canvas: var(--paper);
+    --raised: var(--ivory);
+    --surface: var(--paper);
+  }
+
+  /* Dark, kept for the rare ink element. Not used for whole sections. */
+  .surface-ink {
+    background: var(--ink);
+    color: var(--ivory);
+    --canvas: var(--ink);
+    --fg: var(--ivory);
+    --fg-muted: var(--ivory-muted);
+    --rule: var(--line);
+    --raised: var(--ink-raised);
+    --accent: var(--teal);
+    --focus: var(--teal);
+    --surface: var(--ink);
+    --draw: var(--ivory);
   }
 
   /* ------------------------------------------------------------------ */
   /* Film grain — §3.3. SVG noise at 5%, never intercepts the pointer.    */
-  /* Add `.grain` to any dark section: it isolates a stacking context and the
-     noise sits at z-index -1, above the section background, below its content.    */
+  /* Add `.grain` to a section: it isolates a stacking context and the noise
+     sits at z-index -1, above the section background, below its content.
+     On the light theme it reads as paper tooth.                           */
   /* ------------------------------------------------------------------ */
   .grain {
     position: relative;
@@ -157,11 +185,7 @@
     line-height: 1.4;
     text-transform: uppercase;
     letter-spacing: var(--tracking-eyebrow);
-    color: var(--teal);
-  }
-
-  .surface-ivory .eyebrow {
-    color: var(--teal-ink);
+    color: var(--accent);
   }
 
   .display {
@@ -188,11 +212,7 @@
   /* The one accent word in a headline: italic + teal. */
   .accent {
     font-style: italic;
-    color: var(--teal);
-  }
-
-  .surface-ivory .accent {
-    color: var(--teal-ink);
+    color: var(--accent);
   }
 
   .data {

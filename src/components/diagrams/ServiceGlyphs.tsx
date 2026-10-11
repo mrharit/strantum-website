@@ -123,7 +123,7 @@ function Clash() {
       {/* rerouted position */}
       <rect data-part="accent" x={86} y={52} width={48} height={26} stroke={ACCENT} strokeDasharray="3 3" />
       <path data-part="accent" d="M110 62V74M106 70l4 4 4 -4" stroke={ACCENT} />
-      <Label x={12} y={30} anchor="start" fill={SIGNAL} opacity={1}>
+      <Label x={12} y={30} anchor="start">
         CL-014
       </Label>
       <Label x={12} y={40} anchor="start">

@@ -22,7 +22,7 @@ export function ColumnRules({
               className={`relative border-l border-current/[0.07] ${i > 2 ? "hidden md:block" : ""}`}
             >
               {bubbles && (
-                <span className="data absolute -left-[11px] top-[calc(var(--header-h)+0.9rem)] grid size-[22px] place-items-center rounded-full border border-ivory/25 bg-ink text-[0.6875rem] text-ivory/60">
+                <span className="data absolute -left-[11px] top-[calc(var(--header-h)+0.9rem)] grid size-[22px] place-items-center rounded-full border border-fg/25 bg-canvas text-[0.6875rem] text-fg/60">
                   {l}
                 </span>
               )}

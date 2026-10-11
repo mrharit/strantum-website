@@ -57,6 +57,8 @@ From https://www.marsbim.com/ borrow:
 
 **Surface ratio:** roughly 70% ink, 25% ivory, 5% teal. Red stays under 1%.
 
+> **UPDATE (owner decision, Phase 2): the site is now light.** Competitors all use light sites. Every section sits on ivory (`#E8E4D3`) or a lighter derived `--paper` (`#F3F0E6`), with ink as text and linework, teal for buttons/accents and one solid teal CTA band. This supersedes the 70/25/5 ratio above and every "ink background / ivory text" statement in this brief. Colour tokens are unchanged.
+
 ### 3.2 Typography
 
 - **Display / headings / nav / eyebrows:** **Century Gothic** (the logo's typeface).

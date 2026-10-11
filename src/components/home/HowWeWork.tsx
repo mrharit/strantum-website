@@ -10,7 +10,7 @@ export function HowWeWork() {
     <section
       id="how-we-work"
       aria-labelledby="process-title"
-      className="grain surface-raised border-y border-line py-24 md:py-32"
+      className="grain surface-paper border-y border-rule py-24 md:py-32"
     >
       <div className="container-page">
         <SectionHeading
@@ -28,16 +28,16 @@ export function HowWeWork() {
           {/* Horizontal rail (lg): the base line and the line that draws in. */}
           <div
             aria-hidden="true"
-            className="absolute left-0 right-0 top-[11px] hidden h-px bg-line lg:block"
+            className="absolute left-0 right-0 top-[11px] hidden h-px bg-rule lg:block"
           />
           <div
             aria-hidden="true"
-            className="rv-line absolute left-0 right-0 top-[11px] hidden h-px bg-teal/70 lg:block"
+            className="rv-line absolute left-0 right-0 top-[11px] hidden h-px bg-(--accent)/70 lg:block"
           />
           {/* Vertical rail (below lg) */}
           <div
             aria-hidden="true"
-            className="absolute bottom-3 left-[10px] top-3 w-px bg-line lg:hidden"
+            className="absolute bottom-3 left-[10px] top-3 w-px bg-rule lg:hidden"
           />
 
           <ol className="relative grid gap-12 lg:grid-cols-6 lg:gap-7">
@@ -49,23 +49,23 @@ export function HowWeWork() {
               >
                 <span
                   aria-hidden="true"
-                  className="absolute left-0 top-0 grid size-[22px] place-items-center rounded-full border border-teal bg-ink-raised"
+                  className="absolute left-0 top-0 grid size-[22px] place-items-center rounded-full border border-(--accent) bg-(--surface)"
                 >
-                  <span className="size-1.5 rounded-full bg-teal" />
+                  <span className="size-1.5 rounded-full bg-(--accent)" />
                 </span>
-                <p className="data text-teal">{s.n}</p>
+                <p className="data text-(--accent)">{s.n}</p>
                 <h3 className="font-display mt-2 text-[1.1875rem] leading-snug">
                   {s.title}
                 </h3>
                 {s.ref && (
-                  <p className="data mt-2 text-ivory-muted">{s.ref}</p>
+                  <p className="data mt-2 text-fg-muted">{s.ref}</p>
                 )}
-                <p className="mt-4 flex-1 text-[0.9375rem] leading-relaxed text-ivory-muted">
+                <p className="mt-4 flex-1 text-[0.9375rem] leading-relaxed text-fg-muted">
                   {s.text}
                 </p>
-                <p className="mt-5 border-t border-line pt-3">
-                  <span className="eyebrow !text-ivory-muted">Output</span>
-                  <span className="data mt-1 block text-ivory">{s.output}</span>
+                <p className="mt-5 border-t border-rule pt-3">
+                  <span className="eyebrow !text-fg-muted">Output</span>
+                  <span className="data mt-1 block text-fg">{s.output}</span>
                 </p>
               </li>
             ))}
