@@ -1,0 +1,209 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+/* ------------------------------------------------------------------ */
+/* Brand tokens — CLAUDE.md §3.1. Change values here only.              */
+/* ------------------------------------------------------------------ */
+:root {
+  --ink: #031211;
+  --ink-raised: #0a1f1e;
+  --ivory: #e8e4d3;
+  --ivory-muted: rgba(232, 228, 211, 0.64);
+  --line: rgba(232, 228, 211, 0.12);
+  --teal: #00aebb;
+  --teal-ink: #006d75; /* teal TEXT on ivory (teal on ivory is only ~2.1:1) */
+  --signal: #ff4d4d; /* clash red: clash markers + logo bar only */
+
+  /* Derived for ivory surfaces (not in the brief; checked by `npm run contrast`) */
+  --ink-muted: rgba(3, 18, 17, 0.72);
+  --line-ink: rgba(3, 18, 17, 0.16);
+
+  --header-h: 4.5rem;
+  --focus: var(--teal);
+}
+
+/* Tailwind theme: exposes the tokens as bg-ink, text-ivory, border-line … */
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-raised: var(--ink-raised);
+  --color-ivory: var(--ivory);
+  --color-ivory-muted: var(--ivory-muted);
+  --color-line: var(--line);
+  --color-teal: var(--teal);
+  --color-teal-ink: var(--teal-ink);
+  --color-signal: var(--signal);
+  --color-ink-muted: var(--ink-muted);
+  --color-line-ink: var(--line-ink);
+}
+
+/* Fonts. The --font-* family variables are set by next/font on <html>.
+   To swap Questrial for the licensed Century Gothic files, load them in
+   src/app/fonts.ts with next/font/local — this stack needs no edit. */
+@theme {
+  --font-display: "Century Gothic", var(--font-questrial), sans-serif;
+  --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular",
+    Menlo, Consolas, monospace;
+
+  --tracking-eyebrow: 0.2em;
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                 */
+/* ------------------------------------------------------------------ */
+@layer base {
+  html {
+    background: var(--ink);
+    color: var(--ivory);
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--ink);
+    color: var(--ivory);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    font-feature-settings: "kern", "liga";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--teal);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Lock page scroll behind the mobile menu (Lenis is also stopped in JS). */
+  html.menu-open {
+    overflow: hidden;
+  }
+
+  /* Reduced motion: no smooth scrolling, no motion-based transitions.
+     Components additionally use `motion-reduce:` variants for simple fades. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* ------------------------------------------------------------------ */
+  /* Surfaces                                                             */
+  /* ------------------------------------------------------------------ */
+  .surface-ink {
+    background: var(--ink);
+    color: var(--ivory);
+    --focus: var(--teal);
+  }
+
+  .surface-raised {
+    background: var(--ink-raised);
+    color: var(--ivory);
+    --focus: var(--teal);
+  }
+
+  /* Light sections. Teal text must be --teal-ink here; focus ring flips too. */
+  .surface-ivory {
+    background: var(--ivory);
+    color: var(--ink);
+    --focus: var(--teal-ink);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Film grain — §3.3. SVG noise at 5%, never intercepts the pointer.    */
+  /* Add `.grain` to any dark section: it isolates a stacking context and the
+     noise sits at z-index -1, above the section background, below its content.    */
+  /* ------------------------------------------------------------------ */
+  .grain {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 240px 240px;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Type styles — §3.2                                                   */
+  /* ------------------------------------------------------------------ */
+  .eyebrow {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-eyebrow);
+    color: var(--teal);
+  }
+
+  .surface-ivory .eyebrow {
+    color: var(--teal-ink);
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+
+  .display-xl {
+    font-size: clamp(2.5rem, 1.2rem + 6vw, 6.25rem);
+  }
+
+  .display-lg {
+    font-size: clamp(2rem, 1rem + 4vw, 4.25rem);
+  }
+
+  .display-md {
+    font-size: clamp(1.5rem, 1rem + 1.8vw, 2.5rem);
+    line-height: 1.12;
+  }
+
+  /* The one accent word in a headline: italic + teal. */
+  .accent {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .surface-ivory .accent {
+    color: var(--teal-ink);
+  }
+
+  .data {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .container-page {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 48rem) {
+    .container-page {
+      padding-inline: 2.5rem;
+    }
+  }
+}
