@@ -75,6 +75,17 @@ Derived (not in brief): `--ink-muted` (ink at 72%, secondary text on ivory), `--
 - A fixed header with `backdrop-filter` becomes the containing block for fixed descendants — keep the blur on a separate layer (see `Header.tsx`).
 - Lenis lives in `src/lib/scroll.ts` (`stopScroll`/`startScroll`) and is `null` under reduced motion. Overlays that scroll natively need `data-lenis-prevent`.
 
+## Homepage system (Phase 2)
+
+- **Copy lives in `src/content/home.ts`** (typed, original). Unknown facts are literal `[[TODO: …]]` / `[[CONFIRM: …]]` tokens; render strings through `<RichText>` so they show as visible placeholders. FAQ answers are plain text so they also feed the FAQPage JSON-LD unchanged.
+- **`BuildingDiagram` (`components/diagrams/`)** is the signature: one procedural isometric G+6 building, six `stage`s matching the six scroll-story chapters (1 architecture · 2 structure · 3 MEP · 4 clash · 5 coordinated · 6 documentation sheet). Stages 4–5 are zoomed on the clash via `ZOOM`. It is the hero's first state, the story's diagram, and the Phase 3 mobile / reduced-motion poster sequence. Edit geometry constants at the top (`W`, `D`, `FL`, `H1`).
+- **`ServiceGlyphs`**: nine line drawings, the key frame of each §7.2 micro-animation. Animated parts carry `data-part`. Colours: `currentColor`, `var(--accent)`, `var(--signal)`, `var(--surface)` (opaque fill).
+- **Surface tokens:** `.surface-ink | .surface-raised | .surface-ivory` also set `--accent` (teal / teal-ink), `--focus` and `--surface`. Use `text-(--accent)` for accent text that must work on both.
+- **`<Reveal>`** fades content in on scroll with one shared observer. The hidden state is applied by client JS only, so nothing is hidden without JavaScript. `group` staggers `.rv` children via `--i`.
+- **No-JS rule:** every section must be complete with JavaScript off. Tabs ship all panels plus a `<noscript>` override; FAQ uses native `<details name="faq">`. A `!important` override must live in `@layer base` to beat Tailwind preflight's `[hidden]` rule (layered `!important` beats unlayered).
+- Section rhythm: ink → ink-raised → **ivory (services)** → ink (solutions) → ink-raised (process) → ink (demo) → **ivory (engage)** → ink (founder) → ink-raised (insights) → **ivory (FAQ)** → **teal CTA band** → footer. Keep red under 1%.
+- Dev checks: `npm run typecheck && npm run lint && npm run build`, then `npm run todos`.
+
 ## Acceptance (brief §11)
 
 Lighthouse mobile: Home Perf ≥ 80, A11y/Best-Practices/SEO ≥ 95; every other page Perf ≥ 90. LCP < 2.5 s (4G), CLS < 0.05. WCAG AA contrast (4.5:1 body, 3:1 large). Readable with JavaScript disabled. Reduced-motion fully respected. No fabricated claims.

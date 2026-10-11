@@ -20,6 +20,8 @@
 
   --header-h: 4.5rem;
   --focus: var(--teal);
+  --accent: var(--teal); /* flips to teal-ink on .surface-ivory */
+  --surface: var(--ink); /* current section background, for opaque SVG fills */
 }
 
 /* Tailwind theme: exposes the tokens as bg-ink, text-ivory, border-line … */
@@ -104,12 +106,16 @@
     background: var(--ink);
     color: var(--ivory);
     --focus: var(--teal);
+    --accent: var(--teal);
+    --surface: var(--ink);
   }
 
   .surface-raised {
     background: var(--ink-raised);
     color: var(--ivory);
     --focus: var(--teal);
+    --accent: var(--teal);
+    --surface: var(--ink-raised);
   }
 
   /* Light sections. Teal text must be --teal-ink here; focus ring flips too. */
@@ -117,6 +123,8 @@
     background: var(--ivory);
     color: var(--ink);
     --focus: var(--teal-ink);
+    --accent: var(--teal-ink);
+    --surface: var(--ivory);
   }
 
   /* ------------------------------------------------------------------ */
@@ -204,6 +212,154 @@
   @media (min-width: 48rem) {
     .container-page {
       padding-inline: 2.5rem;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Homepage system (Phase 2)                                            */
+/* ------------------------------------------------------------------ */
+:root {
+  /* expo.out family (§7.3). One easing for the whole site. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer components {
+  .display-hero {
+    font-size: clamp(2.75rem, 1rem + 5.6vw, 5.5rem);
+  }
+
+  /* Small mono tag: LOD values, formats, labels. */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: 1px solid currentColor;
+    border-color: color-mix(in oklab, currentColor 35%, transparent);
+    border-radius: 2px;
+    padding: 0.2rem 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+  }
+
+  /* --- Scroll reveal: attributes are set by <Reveal /> on the client only,
+         so with JavaScript off nothing is ever hidden. --- */
+  [data-reveal="pending"] {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  [data-reveal="shown"] {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.8s var(--ease-out),
+      transform 0.8s var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal-group="pending"] .rv {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  [data-reveal-group="shown"] .rv {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.8s var(--ease-out),
+      transform 0.8s var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 110ms);
+  }
+
+  .rv-line {
+    transform-origin: left center;
+  }
+  [data-reveal-group="pending"] .rv-line {
+    transform: scaleX(0);
+  }
+  [data-reveal-group="shown"] .rv-line {
+    transform: scaleX(1);
+    transition: transform 1.4s var(--ease-out) 0.15s;
+  }
+
+  /* Reduced motion: keep the fade, drop the movement. */
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal="pending"],
+    [data-reveal-group="pending"] .rv {
+      transform: none;
+    }
+    [data-reveal-group="pending"] .rv-line {
+      transform: none;
+    }
+    [data-reveal="shown"],
+    [data-reveal-group="shown"] .rv {
+      transition-duration: 0.3s;
+    }
+    [data-reveal-group="shown"] .rv-line {
+      transition: none;
+    }
+  }
+
+  /* Page-column rules: the vertical hairlines of the drawing sheet. */
+  .col-rules {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* FAQ accordion on native <details>: works with JavaScript off. */
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item .faq-plus::after {
+    transition: transform 0.4s var(--ease-out);
+  }
+  .faq-item[open] .faq-plus::after {
+    transform: scaleY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .faq-item .faq-plus::after {
+      transition: none;
+    }
+  }
+
+  /* The one pulsing element on the page: the clash marker (§7.1, ch. 04). */
+  @media (prefers-reduced-motion: no-preference) {
+    .clash-pulse {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: clash-pulse 2.4s var(--ease-out) infinite;
+    }
+    @keyframes clash-pulse {
+      0% {
+        transform: scale(0.6);
+        opacity: 0.9;
+      }
+      70%,
+      100% {
+        transform: scale(2.2);
+        opacity: 0;
+      }
+    }
+  }
+
+  /* Service glyph hover (cards). Phase 4 swaps in GSAP animations. */
+  .glyph {
+    transition: color 0.4s var(--ease-out);
+  }
+  .group:hover .glyph,
+  .group:focus-visible .glyph {
+    color: var(--accent);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .glyph {
+      transition: none;
     }
   }
 }

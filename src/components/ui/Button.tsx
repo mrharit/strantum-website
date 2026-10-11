@@ -4,7 +4,7 @@ import { ArrowRight } from "@/components/ui/icons";
 type ButtonProps = {
   href: string;
   children: React.ReactNode;
-  variant?: "primary" | "outline";
+  variant?: "primary" | "outline" | "ink";
   size?: "sm" | "md";
   className?: string;
   onClick?: () => void;
@@ -20,6 +20,8 @@ const VARIANTS = {
   primary: "bg-teal text-ink hover:brightness-110",
   outline:
     "border border-current/40 hover:border-teal hover:text-teal",
+  // For use on a teal surface: ink background, ivory text (15:1).
+  ink: "bg-ink text-ivory hover:brightness-150",
 };
 
 export function Button({
@@ -60,6 +62,29 @@ export function ArrowLink({
         <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" />
       </span>
       <span>{children}</span>
+    </Link>
+  );
+}
+
+/** Inline text link in the accent colour: "View service →". */
+export function TextLink({
+  href,
+  children,
+  className = "",
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`data group/tl inline-flex items-center gap-2 py-1 text-(--accent) ${className}`}
+    >
+      <span className="underline decoration-current/30 underline-offset-[5px] transition-[text-decoration-color] duration-300 group-hover/tl:decoration-current motion-reduce:transition-none">
+        {children}
+      </span>
+      <ArrowRight className="size-4 transition-transform duration-300 group-hover/tl:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover/tl:translate-x-0" />
     </Link>
   );
 }
